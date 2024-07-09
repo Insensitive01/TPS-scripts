@@ -7,22 +7,41 @@ local Window = Fluent:CreateWindow({
     SubTitle = "",
     TabWidth = 160,
     Size = UDim2.fromOffset(500, 350),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Acrylic = true,
     Theme = "Aqua",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
---Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Player = Window:AddTab({ Title = "Player", Icon = "" }),
+    Reach = Window:AddTab({ Title = "Reach", Icon = "" }),
+    AirDribbleHelper = Window:AddTab({ Title = "Air Dribble Helper", Icon = "" }),
+    Ball = Window:AddTab({ Title = "Ball", Icon = "" }),
+    Skies = Window:AddTab({ Title = "Skies", Icon = "" }),
+    Trolling = Window:AddTab({ Title = "Trolling", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "" })
 }
 
 local Options = Fluent.Options
 
-do    
-    local Slider = Tabs.Main:AddSlider("Slider", {
-        Title = "Reach",
+do  
+    local Input = Tabs.Player:AddInput("Input", {
+        Title = "Set Level",
+        Default = "Default",
+        Placeholder = "Placeholder",
+        Numeric = true, -- Only allows numbers
+        Finished = false, -- Only calls callback when you press enter
+        Callback = function(Value)
+            print("Input changed:", Value)
+        end
+    })
+
+    Input:OnChanged(function()
+        print("Input updated:", Input.Value)
+    end)    
+
+    local Slider = Tabs.Reach:AddSlider("Slider", {
+        Title = "Set Reach",
         Description = "",
         Default = 2,
         Min = 2,
